@@ -1,0 +1,81 @@
+:root{
+    --primary-bg-color:white;
+    --primary-font-color:black;
+    --primary-font-size:18px;
+}
+
+html{
+    font-family: Helvetica;
+    margin:0px;
+    padding:0px;
+    color: var(--primary-font-color);
+    background-color: var(--primary-bg-color);
+    font-size: var(--primary-font-size);
+}
+
+a{
+    text-decoration: none;
+    color: blue;
+}
+a:hover{
+    color:red;
+}
+.daisyworld-content-wrapper{
+    width:90%;
+    margin: 0 auto;
+}
+
+.daisyworld-headline{
+    text-align: center;
+    padding-top: 25px;
+}
+
+.daisyworld-description{
+
+}
+.daisyworld-description p{
+    font-size: var(--primary-font-size);
+    line-height: 22px;
+}
+
+/* PLOTTING */
+.daisyworld-plots{
+    width:100%;
+}
+.daisyworld-plot-container{
+    position: relative;
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.input-collection-wrapper{
+    margin:0 auto;
+    padding:15px;
+    width:100%;
+    text-align: center;
+}
+
+/* INPUT SECTION */
+.input, .sliderAmount{
+    display: inline-block;
+}
+
+.footer{
+    text-align: center;
+    margin:0 auto;
+}
+
+@media only screen and (min-width: 1000px) {
+    .daisyworld-plot-container{
+        width:50%;
+        height:300px;
+        position: relative;
+        float:left;
+        margin-bottom: 50px;
+    }
+    .input-collection-wrapper{
+        width:80%;
+    }
+}
