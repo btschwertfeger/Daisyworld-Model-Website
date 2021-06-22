@@ -87,6 +87,9 @@ window.default_parameters = {
     maxconv: 1000,
     tol: 0.000001,
 
+    // Fraction of fertile ground
+    p: 1,
+
     // Flux termx
     So: 1000,
     sigma: 5.67032e-8,
@@ -152,7 +155,7 @@ window.updatePlots = function (input = window.default_parameters) {
                     display: true,
                     title: {
                         display: true,
-                        text: 'Luminosity',
+                        text: 'solar luminosity',
                         font: {
                             family: 'Helvetica',
                             size: 16,
@@ -198,21 +201,40 @@ window.updatePlots = function (input = window.default_parameters) {
     document.getElementById('daisyworld-temperature-plot-container').innerHTML = '<canvas id="daisyworld-temperature-plot"></canvas>';
 
     let temp_lumi_data = new Array(RESULT['Tp_vec'].length);
+
     for (let entry = 0; entry < temp_lumi_data.length; entry++) {
         temp_lumi_data[entry] = RESULT['Tp_vec'][entry] - RESULT['KELVIN_OFFSET'];
+    }
+
+    let temp_data = [{
+        label: 'global temperature',
+        data: temp_lumi_data,
+        fill: false,
+        borderColor: 'rgb(255,0,0)',
+        pointRadius: 0,
+    }, {
+        label: 'optimal temperature',
+        data: new Array(temp_lumi_data.length).fill(22.5),
+        fill: false,
+        borderColor: 'rgb(236,193,20)',
+        pointRadius: 0,
+    }];
+
+    if (document.getElementById('showTempWithoutLife-checkbox').checked) {
+        temp_data.push({
+            label: 'Temperature without life',
+            data: RESULT['temp_without_life'],
+            fill: false,
+            borderColor: 'rgb(0,0,0)',
+            pointRadius: 0,
+        })
     }
     let ctx2 = document.getElementById('daisyworld-temperature-plot');
     let daisyworld_temp_lumi = new Chart(ctx2, {
         type: 'line',
         data: {
             labels: RESULT['fluxes'],
-            datasets: [{
-                label: 'temperature (°C)',
-                data: temp_lumi_data,
-                fill: false,
-                borderColor: 'rgb(0,0,0)',
-                pointRadius: 0
-            }],
+            datasets: temp_data,
         },
         options: {
             responsive: true,
@@ -234,7 +256,7 @@ window.updatePlots = function (input = window.default_parameters) {
                     display: true,
                     title: {
                         display: true,
-                        text: 'Luminosity',
+                        text: 'solar luminosity',
                         font: {
                             family: 'Helvetica',
                             size: 16,
@@ -250,7 +272,7 @@ window.updatePlots = function (input = window.default_parameters) {
                     display: true,
                     title: {
                         display: true,
-                        text: 'Tmperature (°C)',
+                        text: 'Temperature (°C)',
                         font: {
                             family: 'Helvetica',
                             size: 16
@@ -303,6 +325,7 @@ function doDaisyWorld(input = window.default_parameters) {
     let maxconv = window.default_parameters['maxconv'],
         tol = window.default_parameters['tol'];
 
+    let p = window.default_parameters['p'];
     // Flux termx
     let So = window.default_parameters['So'],
         sigma = window.default_parameters['sigma'];
@@ -321,6 +344,7 @@ function doDaisyWorld(input = window.default_parameters) {
     let area_black_vec = new Array(fluxes.length).fill(0);
     let area_white_vec = new Array(fluxes.length).fill(0);
     let area_barren_vec = new Array(fluxes.length).fill(0);
+    let temp_without_life_vec = new Array(fluxes.length).fill(0);
     let Tp_vec = new Array(fluxes.length).fill(0);
 
     // LOOP over fluxes
@@ -385,6 +409,7 @@ function doDaisyWorld(input = window.default_parameters) {
         area_black_vec[index] = area_black;
         area_white_vec[index] = area_white;
         area_barren_vec[index] = area_barren;
+        temp_without_life_vec[index] = Math.pow(((So * flux / sigma) * (1 - alb_barren * p)), 1 / 4) - KELVIN_OFFSET;
         Tp_vec[index] = Tp;
 
     });
@@ -394,6 +419,7 @@ function doDaisyWorld(input = window.default_parameters) {
         area_black_vec: area_black_vec,
         area_white_vec: area_white_vec,
         area_barren_vec: area_barren_vec,
+        temp_without_life: temp_without_life_vec,
         Tp_vec: Tp_vec,
         KELVIN_OFFSET: KELVIN_OFFSET,
     }

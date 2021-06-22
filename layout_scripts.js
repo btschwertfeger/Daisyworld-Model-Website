@@ -43,7 +43,7 @@ for (let entry = 0; entry < dw_sliders.length; entry++) {
     }
 }
 /* REVERSE AND KELVIN INPUT */
-let SOMEGOODVARIABLENAME = ['reverse', 'KELVIN_OFFSET'];
+let SOMEGOODVARIABLENAME = ['reverse', 'KELVIN_OFFSET', 'showTempWithoutLife-checkbox'];
 SOMEGOODVARIABLENAME.forEach(function (entry, index) {
     document.getElementById(entry).onchange = function () {
         window.updatePlots({

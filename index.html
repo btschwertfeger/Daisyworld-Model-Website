@@ -16,7 +16,7 @@
         <div class="daisyworld-all">
             <div class="daisyworld-content-wrapper">
                 <div class="daisyworld-headline">
-                    <h1>Daisyworld Model</h1>
+                    <h1>Daisyworld model</h1>
                 </div>
                 <div class="daisyworld-description">
                     <p>
@@ -89,6 +89,17 @@
 
                 <div class="daisyworld-input-section" style="width: 100%;">
                     <div class="input-collection-wrapper">
+                        <div class="input">
+                            <label for="showTempWithoutLife-checkbox">Temperature
+                                without life:
+                            </label>
+                            <input type="checkbox"
+                                id="showTempWithoutLife-checkbox"
+                                name="showTempWithoutLife-checkbox"
+                                value="false">
+                        </div>
+                    </div>
+                    <div class="input-collection-wrapper">
                         <div class="input-collection">
                             <div class="input">
                                 <div>\(\alpha_w\)</div>
@@ -124,7 +135,7 @@
                     <div class="input-collection-wrapper">
 
                         <div class="input">
-                            <div>Insulation:</div>
+                            <div>heat absorb. fact.</div>
                             <div id="insul_sliderAmount" class="sliderAmount">20</div>
                             <input id="insul_slide" type="range"
                                 name="dw_slider"
@@ -181,7 +192,7 @@
                         </div>
 
                         <div class="input">
-                            <label for="KELVIN_OFFSET">Kelvin:
+                            <label for="KELVIN_OFFSET">Kelvin offset:
                             </label>
                             <input type="text" id="KELVIN_OFFSET"
                                 name="KELVIN_OFFSET" value="273.15"
@@ -194,6 +205,16 @@
                 </div>
             </div>
         </div>
+        <p style="width:90%; margin:0 auto;">\(\alpha_w\) = albedo of the white
+            daisies; \(\alpha_b\) = albedo of the black daisies; \(\alpha_g\) =
+            uncovered albedo; heat absorption factor controls how the local
+            temperatures of the daisies differ from the average planetary
+            temperature; \(\gamma\) = death rate; <br><br>
+        </p>
+        <p style="width:90%; margin: 0 auto;">Also interesting: <a
+                href="https://personal.ems.psu.edu/~dmb53/DaveSTELLA/Daisyworld/daisyworld_model.htm"
+                target="_blank">Modeling Daisyworld</a></p>
+
         <div class="placeholder" style="height:50px;"></div>
         <div id="footer" class="footer">
             <p> Model and mathematical basics described in <a
@@ -207,8 +228,8 @@
                     target="_blank">Python
                     implementation</a> by Andrew Bennett, Peter Greve, Eric
                 Jaeger.<br>
-                Translation from Python to Javascript with additional
-                variations, and creation of the page by <a
+                JavaScript implementation with additional
+                variations, and creation of this page by <a
                     href="https://www.b-schwertfeger.de" target="_blank">Benjamin
                     T.
                     Schwertfeger</a>.</p>
