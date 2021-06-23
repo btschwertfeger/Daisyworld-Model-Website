@@ -6,6 +6,7 @@
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-quiv='X-UA-Compatible' content='ie-edge'>
         <link rel='stylesheet' href='css/format.css'>
+
         <!-- CHART JS  -->
         <script
             src='https://cdn.jsdelivr.net/npm/chart.js@3.3.1/dist/chart.min.js'> </script>
@@ -73,6 +74,8 @@
                         different albedo of different vegetation types.
                     </p>
                 </div>
+
+                <!-- PLOTS -->
                 <div class="placeholder" style="height:42px;"></div>
                 <div class="daisyworld-plots">
                     <div id="daisyworld-area-plot-container"
@@ -87,25 +90,86 @@
                     </div>
                 </div>
 
-                <div class="daisyworld-input-section" style="width: 100%;">
-                    <div class="input-collection-wrapper">
-                        <div class="input">
-                            <label for="showTempWithoutLife-checkbox">Temperature
-                                without life:
-                            </label>
-                            <input type="checkbox"
-                                id="showTempWithoutLife-checkbox"
-                                name="showTempWithoutLife-checkbox"
-                                value="false">
+                <div class="dw-input-container" style="width:100%;">
+                    <!-- INPUT SECTION -->
+                    <div class="daisyworld-input-section" style="text-align:
+                        center;">
+                        <div class="input-collection-wrapper">
+                            <div class="input">
+                                <label for="showBlackDinc-checkbox">black
+                                    daisies
+                                    for increasing \(L\)
+                                </label>
+                                <input type="checkbox"
+                                    id="showBlackDinc-checkbox"
+                                    name="showBlackDinc-checkbox"
+                                    value="true" checked>
+                            </div>
+                            <div class="input">
+                                <label for="showWhiteDdec-checkbox">white
+                                    daisies
+                                    for decreasing \(L\)
+                                </label>
+                                <input type="checkbox"
+                                    id="showWhiteDdec-checkbox"
+                                    name="showWhiteDdec-checkbox"
+                                    value="false">
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-collection-wrapper">
+
+                        <div class="input-collection-wrapper">
+                            <div class="input">
+                                <label for="showWhiteDinc-checkbox">white
+                                    daisies
+                                    for increasing \(L\)
+                                </label>
+                                <input type="checkbox"
+                                    id="showWhiteDinc-checkbox"
+                                    name="showWhiteDinc-checkbox"
+                                    value="true" checked>
+                            </div>
+                            <div class="input">
+                                <label for="showBlackDdec-checkbox">black
+                                    daisies
+                                    for decreasing. \(L\)
+                                </label>
+                                <input type="checkbox"
+                                    id="showBlackDdec-checkbox"
+                                    name="showBlackDdec-checkbox"
+                                    value="false">
+                            </div>
+                        </div>
+
+                        <div class="input-collection-wrapper">
+                            <div class="input">
+                                <label for="showTotalAmountD4incL-checkbox">total
+                                    amount of daisies for increasing \(T\)
+                                </label>
+                                <input type="checkbox"
+                                    id="showTotalAmountD4incL-checkbox"
+                                    name="showTotalAmountD4incL-checkbox"
+                                    value="false">
+                            </div>
+
+                            <div class="input">
+                                <label for="showTotalAmountD4decL-checkbox">total
+                                    amount of daisies for decreasing \(T\)
+                                </label>
+                                <input type="checkbox"
+                                    id="showTotalAmountD4decL-checkbox"
+                                    name="showTotalAmountD4decL-checkbox"
+                                    value="false">
+                            </div>
+
+                        </div>
                         <div class="input-collection">
                             <div class="input">
                                 <div>\(\alpha_w\)</div>
-                                <div id="alb_white_sliderAmount" style="display:
+                                <div id="alb_white_sliderAmount"
+                                    style="display:
                                     inline;">0.75</div>
                                 <input id="alb_white_slide" type="range"
+                                    class="dw_slider"
                                     name="dw_slider"
                                     min="0" max="1"
                                     step="0.01" value="0.75">
@@ -113,9 +177,11 @@
 
                             <div class="input">
                                 <div>\(\alpha_b\)</div>
-                                <div id="alb_black_sliderAmount" style="display:
+                                <div id="alb_black_sliderAmount"
+                                    style="display:
                                     inline;">0.25</div>
                                 <input id="alb_black_slide" type="range"
+                                    class="dw_slider"
                                     name="dw_slider"
                                     min="0" max="1"
                                     step="0.01" value="0.25">
@@ -126,18 +192,18 @@
                                 <div id="alb_barren_sliderAmount"
                                     class="sliderAmount">0.5</div>
                                 <input id="alb_barren_slide" type="range"
+                                    class="dw_slider"
                                     name="dw_slider"
                                     min="0" max="1"
                                     step="0.01" value="0.5">
                             </div>
                         </div>
-                    </div>
-                    <div class="input-collection-wrapper">
-
                         <div class="input">
                             <div>heat absorb. fact.</div>
-                            <div id="insul_sliderAmount" class="sliderAmount">20</div>
+                            <div id="insul_sliderAmount"
+                                class="sliderAmount">20</div>
                             <input id="insul_slide" type="range"
+                                class="dw_slider"
                                 name="dw_slider"
                                 min="0" max="100"
                                 step="0.1" value="20">
@@ -145,19 +211,42 @@
 
                         <div class="input">
                             <div>\(\gamma\)</div>
-                            <div id="drate_sliderAmount" class="sliderAmount">0.3</div>
+                            <div id="drate_sliderAmount"
+                                class="sliderAmount">0.3</div>
                             <input id="drate_slide" type="range"
+                                class="dw_slider"
                                 name="dw_slider"
                                 min="0" max="1"
                                 step="0.01" value="0.3">
                         </div>
-                    </div>
-                    <div class="input-collection-wrapper">
+
+                        <div class="input">
+                            <div>optimal \(T_w\)</div>
+                            <div id="optTw_sliderAmount"
+                                class="sliderAmount">22.5</div>
+                            <input id="optTw_slide" type="range"
+                                class="dw_slider"
+                                name="dw_slider"
+                                min="0" max="60"
+                                step="0.5" value="22.5">
+                        </div>
+
+                        <div class="input">
+                            <div>optimal \(T_b\)</div>
+                            <div id="optTb_sliderAmount"
+                                class="sliderAmount">22.5</div>
+                            <input id="optTb_slide" type="range"
+                                class="dw_slider"
+                                name="dw_slider"
+                                min="0" max="60"
+                                step="0.5" value="22.5">
+                        </div>
                         <div class="input">
                             <div>\(L_{min}\)</div>
                             <div id="Sflux_min_sliderAmount"
                                 class="sliderAmount">0.5</div>
                             <input id="Sflux_min_slide" type="range"
+                                class="dw_slider"
                                 name="dw_slider"
                                 min="0" max="1"
                                 step="0.01" value="0.5">
@@ -168,72 +257,127 @@
                             <div id="Sflux_max_sliderAmount"
                                 class="sliderAmount">1.6</div>
                             <input id="Sflux_max_slide" type="range"
+                                class="dw_slider"
                                 name="dw_slider"
                                 min="0" max="5"
                                 step="0.01" value="1.6">
                         </div>
 
-                        <div class="input">
+                        <div class="input" style="width:220px;">
                             <div>\(L_{step}\)</div>
                             <div id="Sflux_step_sliderAmount"
                                 class="sliderAmount">0.002</div>
                             <input id="Sflux_step_slide" type="range"
+                                class="dw_slider"
                                 name="dw_slider"
                                 min="0" max="0.02"
                                 step="0.0005" value="0.002">
                         </div>
+                        <div class="input-collection-wrapper">
+                            <div class="input">
+                                <label for="KELVIN_OFFSET">Kelvin offset:
+                                </label>
+                                <input type="text" id="KELVIN_OFFSET"
+                                    name="KELVIN_OFFSET" value="273.15"
+                                    style="width:50px;">
+                            </div>
+                            <div class="input">
+                                <button id="resetBtn" class="resetBtn">Reset</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-collection-wrapper">
-                        <div class="input">
-                            <label for="reverse">reverse:
-                            </label>
-                            <input type="checkbox" id="reverse" name="reverse"
-                                value="false">
-                        </div>
 
-                        <div class="input">
-                            <label for="KELVIN_OFFSET">Kelvin offset:
-                            </label>
-                            <input type="text" id="KELVIN_OFFSET"
-                                name="KELVIN_OFFSET" value="273.15"
-                                style="width:50px;">
+                    <div class="dw-info">
+                        <div class="input-collection-wrapper">
+                            <div class="input">
+                                <label for="showglobTinc-checkbox">global
+                                    \(T\) increasing \(L\):
+                                </label>
+                                <input type="checkbox"
+                                    id="showglobTinc-checkbox"
+                                    name="showglobTinc-checkbox"
+                                    value="false" checked>
+                            </div>
+                            <div class="input">
+                                <label for="showglobTdec-checkbox">global
+                                    \(T\)
+                                    decreasing. \(L\):
+                                </label>
+                                <input type="checkbox"
+                                    id="showglobTdec-checkbox"
+                                    name="showglobTdec-checkbox"
+                                    value="false">
+                            </div>
+                            <div class="input">
+                                <label for="showTempWithoutLife-checkbox">\(T\)
+                                    without life:
+                                </label>
+                                <input type="checkbox"
+                                    id="showTempWithoutLife-checkbox"
+                                    name="showTempWithoutLife-checkbox"
+                                    value="false">
+                            </div>
                         </div>
-                        <div class="input">
-                            <button id="resetBtn">Reset</button>
-                        </div>
+                        <!-- INFORMATIONS -->
+                        <p>Heat absorption factor controls how the local
+                            temperatures of the daisies differ from the average
+                            planetary temperatures. <br><br>
+                        </p>
+
+                        <table class="dw-info-table">
+                            <tr>
+                                <td>\(\alpha_w\)</td>
+                                <td>- albedo of
+                                    the
+                                    white
+                                    daisies</td>
+                            </tr>
+                            <tr>
+                                <td>\(\alpha_b\)</td>
+                                <td>- albedo of the black daisies</td>
+                            </tr>
+                            <tr>
+                                <td>\(\alpha_g\)</td>
+                                <td>- duncovered albedo</td>
+                            </tr>
+                            <tr>
+                                <td>\(\gamma\)</td>
+                                <td>- death rate</td>
+                            </tr>
+                        </table>
+
+                        <p style="margin: 20px 0px 0px 20px;">Also interesting:
+                            <a
+                                href="https://personal.ems.psu.edu/~dmb53/DaveSTELLA/Daisyworld/daisyworld_model.htm"
+                                target="_blank">Modeling Daisyworld</a></p>
                     </div>
                 </div>
             </div>
         </div>
-        <p style="width:90%; margin:0 auto;">\(\alpha_w\) = albedo of the white
-            daisies; \(\alpha_b\) = albedo of the black daisies; \(\alpha_g\) =
-            uncovered albedo; heat absorption factor controls how the local
-            temperatures of the daisies differ from the average planetary
-            temperature; \(\gamma\) = death rate; <br><br>
-        </p>
-        <p style="width:90%; margin: 0 auto;">Also interesting: <a
-                href="https://personal.ems.psu.edu/~dmb53/DaveSTELLA/Daisyworld/daisyworld_model.htm"
-                target="_blank">Modeling Daisyworld</a></p>
-
-        <div class="placeholder" style="height:50px;"></div>
-        <div id="footer" class="footer">
+        <!-- <div class="placeholder" style="height:70px;"></div> -->
+        <div id="footer" class="footer" style="width:90%;">
             <p> Model and mathematical basics described in <a
                     href="https://www.tandfonline.com/doi/pdf/10.3402/tellusb.v35i4.14616"
                     target="_blank"><i>"Biological
-                        homeostasis of the global environment: the parable of
+                        homeostasis of the global environment: the
+                        parable
+                        of
                         Daisyworld"</i></a>
                 by Andrew J. Watson & James E. Lovelock.<br>
                 <a
                     href="https://gist.github.com/arbennett/26c124aeeb1e397b9e35ab8f2047709a"
                     target="_blank">Python
-                    implementation</a> by Andrew Bennett, Peter Greve, Eric
+                    implementation</a> by Andrew Bennett, Peter Greve,
+                Eric
                 Jaeger.<br>
                 JavaScript implementation with additional
                 variations, and creation of this page by <a
-                    href="https://www.b-schwertfeger.de" target="_blank">Benjamin
+                    href="https://www.b-schwertfeger.de"
+                    target="_blank">Benjamin
                     T.
                     Schwertfeger</a>.</p>
         </div>
+
         <script src="main.js"></script>
         <script src="layout_scripts.js"></script>
     </body>

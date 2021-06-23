@@ -20,6 +20,7 @@ a{
 a:hover{
     color:red;
 }
+
 .daisyworld-content-wrapper{
     width:90%;
     margin: 0 auto;
@@ -30,9 +31,6 @@ a:hover{
     padding-top: 25px;
 }
 
-.daisyworld-description{
-
-}
 .daisyworld-description p{
     font-size: var(--primary-font-size);
     line-height: 22px;
@@ -50,45 +48,100 @@ a:hover{
     box-sizing: border-box;
 }
 
+.daisyworld-input-section{
+    display: inline-block;
+}
 .input-collection-wrapper{
     margin:0 auto;
-    padding:15px;
     width:100%;
     text-align: center;
 }
 
 /* INPUT SECTION */
+.input{
+    min-width:190px;
+    margin:8px;
+}
+
+.dw_slider{
+    width:70%;
+    float:right;
+}
+
 .input, .sliderAmount{
     display: inline-block;
 }
 
+.resetBtn{
+    background-color: rgb(192, 192, 192);
+    color:black;
+    padding:5px 10px;
+    display:inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border:1px solid black;
+    border-radius: 5px 5px 5px 5px;
+
+    text-align: center;
+    text-decoration: none;
+}
+.resetBtn:hover{
+    color:red;
+}
+
+
+.dw-input-container{
+    width:100%;
+}
+.dw-info{
+    width:100%;
+    margin:0 auto;
+    font-size: var(--primary-font-size);
+}
+
+.dw-info-table{
+   /* margin: 20px 0px 20px 0px; */
+   margin: 0 auto;;
+   width:60%;
+   /* text-align: center; */
+   font-size: 18;
+}
 .footer{
     text-align: center;
+    font-size:16px;
     margin:0 auto;
 }
+
 @media only screen and (min-width: 1000px) {
     .daisyworld-plot-container{
         width:50%;
-        height:300px;
+        /* height:300px; */
         position: relative;
         float:left;
     }
     .input-collection-wrapper{
         width:80%;
     }
+    .dw-input-container{
+        height:900px;
+    }
 }
 @media only screen and (min-width: 1250px) {
     .daisyworld-plot-container{
-        margin-bottom: 80px;
+        margin-bottom: 20px;
     }
-}
-@media only screen and (min-width: 1600px) {
-    .daisyworld-plot-container{
-        margin-bottom: 100px;
+    .daisyworld-input-section{
+        width:60%;
+        float:left;
+        margin: 0;
     }
-}
-@media only screen and (min-width: 1800px) {
-    .daisyworld-plot-container{
-        margin-bottom: 120px;
+    .dw-info{
+        width:40%;
+        float:left;
+    }
+    
+    .dw-input-container{
+        width:100%;
+        /* height:780px; */
     }
 }
