@@ -34,6 +34,7 @@ a:hover{
 .daisyworld-description p{
     font-size: var(--primary-font-size);
     line-height: 22px;
+    text-align: justify;
 }
 
 /* PLOTTING */
@@ -115,7 +116,6 @@ a:hover{
 @media only screen and (min-width: 1000px) {
     .daisyworld-plot-container{
         width:50%;
-        /* height:300px; */
         position: relative;
         float:left;
     }
@@ -142,6 +142,5 @@ a:hover{
     
     .dw-input-container{
         width:100%;
-        /* height:780px; */
     }
 }

@@ -1,3 +1,8 @@
+<!--
+    ########################################
+    ## @author Benjamin Thomas Schwertfeger (June 2021)
+    ############ 
+-->
 <!DOCTYPE html>
 <html lang='en'>
     <head>
@@ -16,7 +21,7 @@
     <body>
         <div class="daisyworld-all">
             <div class="daisyworld-content-wrapper">
-                <div class="daisyworld-headline">
+                <div class="daisyworld-headline" style="margin-bottom: 40px;">
                     <h1>Daisyworld model</h1>
                 </div>
                 <div class="daisyworld-description">
@@ -28,7 +33,8 @@
                                 parable of
                                 Daisyworld"</i></a> in 1983.
                     </p><p>
-                        Daisyworld is a theoretical cloudless planet without
+                        Daisyworld is a theoretical cloudless planet with
+                        negligible
                         greenhouse gases where only
                         black and white daisies live. The white ones have a
                         higher albedo (\(\alpha\))
@@ -45,9 +51,7 @@
                         And
                         while the planet is covered with more and more white
                         daisies, they begin to reflect more and more energy back
-                        into space.
-                        The more solar radiation is reflected, the higher the
-                        albedo.
+                        into space because their albedo is higher.
 
                         When more energy is reflected, the colder it
                         gets on the planet and the more uncomfortable it becomes
@@ -58,7 +62,8 @@
                         is higher and the planet cools down - they work against
                         the sun (negaitve feedback). The black daisies
                         like the cold, grow up, absorb and store the energy, so
-                        the planet gets warmer - the work with the sun (positive
+                        the planet gets warmer - they work with the sun
+                        (positive
                         feedback). 22.5°C is the optimal growth temperature for
                         both black and white daisies. Together they regulate
                         the planets temperature producing a stable environment
@@ -106,19 +111,6 @@
                                     value="true" checked>
                             </div>
                             <div class="input">
-                                <label for="showWhiteDdec-checkbox">white
-                                    daisies
-                                    for decreasing \(L\)
-                                </label>
-                                <input type="checkbox"
-                                    id="showWhiteDdec-checkbox"
-                                    name="showWhiteDdec-checkbox"
-                                    value="false">
-                            </div>
-                        </div>
-
-                        <div class="input-collection-wrapper">
-                            <div class="input">
                                 <label for="showWhiteDinc-checkbox">white
                                     daisies
                                     for increasing \(L\)
@@ -128,14 +120,27 @@
                                     name="showWhiteDinc-checkbox"
                                     value="true" checked>
                             </div>
+                        </div>
+
+                        <div class="input-collection-wrapper">
                             <div class="input">
                                 <label for="showBlackDdec-checkbox">black
                                     daisies
-                                    for decreasing. \(L\)
+                                    for decreasing \(L\)
                                 </label>
                                 <input type="checkbox"
                                     id="showBlackDdec-checkbox"
                                     name="showBlackDdec-checkbox"
+                                    value="false">
+                            </div>
+                            <div class="input">
+                                <label for="showWhiteDdec-checkbox">white
+                                    daisies
+                                    for decreasing \(L\)
+                                </label>
+                                <input type="checkbox"
+                                    id="showWhiteDdec-checkbox"
+                                    name="showWhiteDdec-checkbox"
                                     value="false">
                             </div>
                         </div>
@@ -274,13 +279,6 @@
                                 step="0.0005" value="0.002">
                         </div>
                         <div class="input-collection-wrapper">
-                            <div class="input">
-                                <label for="KELVIN_OFFSET">Kelvin offset:
-                                </label>
-                                <input type="text" id="KELVIN_OFFSET"
-                                    name="KELVIN_OFFSET" value="273.15"
-                                    style="width:50px;">
-                            </div>
                             <div class="input">
                                 <button id="resetBtn" class="resetBtn">Reset</button>
                             </div>

@@ -7,7 +7,7 @@ Implementation in Python by Andrew Bennet, Peter Greve, and Eric Jaeger. They ma
 via Github (https://gist.github.com/arbennett/26c124aeeb1e397b9e35ab8f2047709a (2021-06-18)).
 
 Benjamin Thomas Schwertfeger has received permission from Andrew Bennett to translate and
-implement their code in JavaScript to help students better understand the learning content,
+implement and exrtend their code in JavaScript to help students better understand the learning content,
 among other things. 
 
 2021 June
@@ -16,7 +16,7 @@ among other things.
 
 /*
 ########################################
-## @author Benjamin Thomas Schwertfeger
+## @author Benjamin Thomas Schwertfeger 
 ############
 */
 
@@ -63,9 +63,9 @@ function range(start, end, step) {
     return range;
 }
 
-/* DAISYWORLD */
-let KELVIN_OFFSET = 273.15;
-let g_optTw = 22.5,
+/* SETTINGS */
+let KELVIN_OFFSET = 273.15,
+    g_optTw = 22.5,
     g_optTb = 22.5;
 window.default_parameters = {
     // Temperatures
@@ -102,93 +102,90 @@ window.default_parameters = {
     Sflux_max: 1.6,
     Sflux_step: 0.002,
 }
+window.lastResult = {};
+let ACTIVE_DATA_AREA_PLOT = [{}, {}, {}, {}, {}, {}],
+    ACTIVE_DATA_TEMP_PLOT = [{}, {}, {}, {}];
 
-// PLOTTING
-window.updatePlots = function (input = window.default_parameters) {
-    let RESULT = doDaisyWorld(input);
+window.areaPlot_checkboxes = ['showBlackDinc-checkbox', 'showWhiteDinc-checkbox',
+    'showBlackDdec-checkbox', 'showWhiteDdec-checkbox', 'showTotalAmountD4incL-checkbox',
+    'showTotalAmountD4decL-checkbox'
+];
+window.tempPlot_checkboxes = ['showglobTinc-checkbox', 'showglobTdec-checkbox',
+    'showTempWithoutLife-checkbox'
+];
+
+/* CREATE PLOTS */
+window.createPlots = function (input = window.default_parameters) {
+    window.lastResult = doDaisyWorld(input);
+
+    /*
+    ###############################################
+    ############## AREA PLOT ######################
+    ###############################################
+    */
+
+    let black_data_inc = new Array(window.lastResult['area_black_vec_inc'].length),
+        white_data_inc = new Array(window.lastResult['area_white_vec_inc'].length),
+        black_data_dec = new Array(window.lastResult['area_black_vec_dec'].length),
+        white_data_dec = new Array(window.lastResult['area_white_vec_dec'].length);
+
+    for (let entry = 0; entry < black_data_inc.length; entry++) {
+        black_data_inc[entry] = window.lastResult['area_black_vec_inc'][entry] * 100;
+        white_data_inc[entry] = window.lastResult['area_white_vec_inc'][entry] * 100;
+        black_data_dec[entry] = window.lastResult['area_black_vec_dec'][entry] * 100;
+        white_data_dec[entry] = window.lastResult['area_white_vec_dec'][entry] * 100;
+    }
+
+    window.ALL_AREA_DATASETS = [{
+        label: 'black incr. L',
+        data: black_data_inc,
+        fill: false,
+        borderColor: 'rgb(0,0,0)',
+        pointRadius: 0
+    }, {
+        label: 'white incr. L',
+        data: white_data_inc,
+        fill: false,
+        borderColor: 'rgb(255,0,03)',
+        pointRadius: 0
+    }, {
+        label: 'black decr. L',
+        data: black_data_dec,
+        fill: false,
+        borderColor: 'rgb(150,150,150)',
+        pointRadius: 0
+    }, {
+        label: 'white decr. L',
+        data: white_data_dec,
+        fill: false,
+        borderColor: 'rgb(236,193,20)',
+        pointRadius: 0
+    }, {
+        label: 'total amount of daisies for incr. L',
+        data: window.lastResult['total_amount_daisy4incL'],
+        fill: false,
+        borderColor: 'rgb(127,255,0)',
+        pointRadius: 0,
+    }, {
+        label: 'total amount of daisies for decr. L',
+        data: window.lastResult['total_amount_daisy4decL'],
+        fill: false,
+        borderColor: 'rgb(0,0,255)',
+        pointRadius: 0,
+    }];
+
+    window.areaPlot_checkboxes.forEach((element, index) => {
+        ACTIVE_DATA_AREA_PLOT[index] = (document.getElementById(element).checked) ? window.ALL_AREA_DATASETS[index] : {};
+    });
 
     document.getElementById('daisyworld-area-plot').remove();
     document.getElementById('daisyworld-area-plot-container').innerHTML = '<canvas id="daisyworld-area-plot"></canvas>';
-
-    let black_data_inc = new Array(RESULT['area_black_vec_inc'].length),
-        white_data_inc = new Array(RESULT['area_white_vec_inc'].length),
-        black_data_dec = new Array(RESULT['area_black_vec_dec'].length),
-        white_data_dec = new Array(RESULT['area_white_vec_dec'].length);
-
-    for (let entry = 0; entry < black_data_inc.length; entry++) {
-        black_data_inc[entry] = RESULT['area_black_vec_inc'][entry] * 100;
-        white_data_inc[entry] = RESULT['area_white_vec_inc'][entry] * 100;
-        black_data_dec[entry] = RESULT['area_black_vec_dec'][entry] * 100;
-        white_data_dec[entry] = RESULT['area_white_vec_dec'][entry] * 100;
-    }
-
-    let areaData = [];
-    if (document.getElementById('showWhiteDinc-checkbox').checked) {
-        areaData.push({
-            label: 'white increasing L',
-            data: white_data_inc,
-            fill: false,
-            borderColor: 'rgb(255,0,03)',
-            pointRadius: 0
-        });
-    }
-    if (document.getElementById('showWhiteDdec-checkbox').checked) {
-        areaData.push({
-            label: 'white decreasing L',
-            data: white_data_dec,
-            fill: false,
-            borderColor: 'rgb(180,100,20)',
-            pointRadius: 0
-        });
-    }
-
-    if (document.getElementById('showBlackDinc-checkbox').checked) {
-        areaData.push({
-            label: 'black increasing L',
-            data: black_data_inc,
-            fill: false,
-            borderColor: 'rgb(0,0,0)',
-            pointRadius: 0
-        });
-    }
-
-    if (document.getElementById('showBlackDdec-checkbox').checked) {
-        areaData.push({
-            label: 'black decreasing L',
-            data: black_data_dec,
-            fill: false,
-            borderColor: 'rgb(150,150,150)',
-            pointRadius: 0
-        });
-    }
-
-    if (document.getElementById('showTotalAmountD4incL-checkbox').checked) {
-        // console.log(RESULT['total_amount_daisy4incL'])
-        areaData.push({
-            label: 'total amount of daisies for incr. L',
-            data: RESULT['total_amount_daisy4incL'],
-            fill: false,
-            borderColor: 'rgb(127,255,0)',
-            pointRadius: 0,
-        })
-    }
-
-    if (document.getElementById('showTotalAmountD4decL-checkbox').checked) {
-        areaData.push({
-            label: 'total amount of daisies for incr. L',
-            data: RESULT['total_amount_daisy4decL'],
-            fill: false,
-            borderColor: 'rgb(0,0,255)',
-            pointRadius: 0,
-        })
-    }
-
     let ctx1 = document.getElementById('daisyworld-area-plot');
-    let daisyworld_area_lumi = new Chart(ctx1, {
+    window.dw_area_plot = new Chart(ctx1, {
         type: 'line',
         data: {
-            labels: RESULT['fluxes'],
-            datasets: areaData,
+            labels: window.lastResult['fluxes'],
+            datasets: ACTIVE_DATA_AREA_PLOT,
         },
         options: {
             responsive: true,
@@ -199,13 +196,17 @@ window.updatePlots = function (input = window.default_parameters) {
                     font: {
                         Family: 'Helvetica',
                         size: 18
-                    }
+                    },
                 },
                 legend: {
                     position: 'top',
-                }
+                    labels: {
+                        filter: function (label, index) {
+                            if (label.text) return true;
+                        },
+                    },
+                },
             },
-
             scales: {
                 x: {
                     display: true,
@@ -219,7 +220,7 @@ window.updatePlots = function (input = window.default_parameters) {
                     },
                     ticks: {
                         callback: function (value, index, values) {
-                            return Math.round(RESULT['fluxes'][index] * 100) / 100;
+                            return Math.round(window.lastResult['fluxes'][index] * 100) / 100;
                         }
                     }
                 },
@@ -249,63 +250,63 @@ window.updatePlots = function (input = window.default_parameters) {
                 intersect: false,
                 axis: 'x'
             }
-
         }
     });
 
-    document.getElementById('daisyworld-temperature-plot').remove();
-    document.getElementById('daisyworld-temperature-plot-container').innerHTML = '<canvas id="daisyworld-temperature-plot"></canvas>';
+    /*
+    ###############################################
+    ############## Temperature PLOT ###############
+    ###############################################
+    */
 
-    let temp_lumi_data_inc = new Array(RESULT['Tp_vec_inc'].length),
-        temp_lumi_data_dec = new Array(RESULT['Tp_vec_dec'].length);
+    let temp_lumi_data_inc = new Array(window.lastResult['Tp_vec_inc'].length),
+        temp_lumi_data_dec = new Array(window.lastResult['Tp_vec_dec'].length);
 
     for (let entry = 0; entry < temp_lumi_data_inc.length; entry++) {
-        temp_lumi_data_inc[entry] = RESULT['Tp_vec_inc'][entry] - RESULT['KELVIN_OFFSET'];
-        temp_lumi_data_dec[entry] = RESULT['Tp_vec_dec'][entry] - RESULT['KELVIN_OFFSET'];
+        temp_lumi_data_inc[entry] = window.lastResult['Tp_vec_inc'][entry] - window.lastResult['KELVIN_OFFSET'];
+        temp_lumi_data_dec[entry] = window.lastResult['Tp_vec_dec'][entry] - window.lastResult['KELVIN_OFFSET'];
     }
 
-    let temp_data = [{
+    window.ALL_TEMP_DATASETS = [{
         label: 'optimal temperature',
         data: new Array(temp_lumi_data_inc.length).fill(22.5),
         fill: false,
         borderColor: 'rgb(236,193,20)',
         pointRadius: 0,
+    }, {
+        label: 'global temperature incr. L',
+        data: temp_lumi_data_inc,
+        fill: false,
+        borderColor: 'rgb(255,0,0)',
+        pointRadius: 0,
+    }, {
+        label: 'global temperature decr. L',
+        data: temp_lumi_data_dec,
+        fill: false,
+        borderColor: 'rgb(0,0,255)',
+        pointRadius: 0,
+    }, {
+        label: 'temperature without life',
+        data: window.lastResult['temp_without_life_inc'],
+        fill: false,
+        borderColor: 'rgb(0,0,0)',
+        pointRadius: 0,
     }];
 
-    if (document.getElementById('showglobTinc-checkbox').checked) {
-        temp_data.push({
-            label: 'global temperature incr. L',
-            data: temp_lumi_data_inc,
-            fill: false,
-            borderColor: 'rgb(255,0,0)',
-            pointRadius: 0,
-        });
-    }
-    if (document.getElementById('showglobTdec-checkbox').checked) {
-        temp_data.push({
-            label: 'global temperature decr. L',
-            data: temp_lumi_data_dec,
-            fill: false,
-            borderColor: 'rgb(0,0,255)',
-            pointRadius: 0,
-        });
-    }
+    ACTIVE_DATA_TEMP_PLOT[0] = ALL_TEMP_DATASETS[0]; // optimal temp
+    window.tempPlot_checkboxes.forEach((element, index) => {
+        // index+1 because the optimal temperature is alwys shown
+        ACTIVE_DATA_TEMP_PLOT[index + 1] = (document.getElementById(element).checked) ? window.ALL_TEMP_DATASETS[index + 1] : {};
+    });
 
-    if (document.getElementById('showTempWithoutLife-checkbox').checked) {
-        temp_data.push({
-            label: 'Temperature without life',
-            data: RESULT['temp_without_life_inc'],
-            fill: false,
-            borderColor: 'rgb(0,0,0)',
-            pointRadius: 0,
-        })
-    }
+    document.getElementById('daisyworld-temperature-plot').remove();
+    document.getElementById('daisyworld-temperature-plot-container').innerHTML = '<canvas id="daisyworld-temperature-plot"></canvas>';
     let ctx2 = document.getElementById('daisyworld-temperature-plot');
-    let daisyworld_temp_lumi = new Chart(ctx2, {
+    window.dw_temp_plot = new Chart(ctx2, {
         type: 'line',
         data: {
-            labels: RESULT['fluxes'],
-            datasets: temp_data,
+            labels: window.lastResult['fluxes'],
+            datasets: ACTIVE_DATA_TEMP_PLOT,
         },
         options: {
             responsive: true,
@@ -320,7 +321,12 @@ window.updatePlots = function (input = window.default_parameters) {
                 },
                 legend: {
                     position: 'top',
-                }
+                    labels: {
+                        filter: function (label, index) {
+                            if (label.text) return true;
+                        },
+                    },
+                },
             },
             scales: {
                 x: {
@@ -335,7 +341,7 @@ window.updatePlots = function (input = window.default_parameters) {
                     },
                     ticks: {
                         callback: function (value, index, values) {
-                            return Math.round(RESULT['fluxes'][index] * 100) / 100;
+                            return Math.round(window.lastResult['fluxes'][index] * 100) / 100;
                         }
                     }
                 },
@@ -365,14 +371,35 @@ window.updatePlots = function (input = window.default_parameters) {
                 intersect: false,
                 axis: 'x'
             }
-
         }
     });
 }
 
+// called when checkbox change
+window.updatePlot = function (what) {
+    if (what == "area") {
+        window.areaPlot_checkboxes.forEach((element, index) => {
+            ACTIVE_DATA_AREA_PLOT[index] = (document.getElementById(element).checked) ? window.ALL_AREA_DATASETS[index] : {};
+        });
+
+        window.dw_area_plot.data.datasets = ACTIVE_DATA_AREA_PLOT;
+        window.dw_area_plot.update();
+
+    } else if (what == "temp") {
+        window.tempPlot_checkboxes.forEach((element, index) => {
+            // index+1 because the optimal temperature is alwys shown
+            ACTIVE_DATA_TEMP_PLOT[index + 1] = (document.getElementById(element).checked) ? window.ALL_TEMP_DATASETS[index + 1] : {};
+        });
+
+        window.dw_temp_plot.data.datasets = ACTIVE_DATA_TEMP_PLOT;
+        window.dw_temp_plot.update();
+    }
+}
+
+// kind = "incr" or "decr"
 function computeDaisyworld(input, kind) {
     // Temperatures
-    let KELVIN_OFFSET = parseFloat(input['KELVIN_OFFSET']);
+    let KELVIN_OFFSET = parseFloat(window.default_parameters['KELVIN_OFFSET']);
     let optTw = parseFloat(input['optTw']),
         optTb = parseFloat(input['optTb']);
     let Td_min = 5 + KELVIN_OFFSET,
@@ -510,10 +537,10 @@ function computeDaisyworld(input, kind) {
 
     }
 }
-// CALCULATION
+// doit and return
 function doDaisyWorld(input = window.default_parameters) {
-    let res4incrL = computeDaisyworld(input, "incr");
-    let res4decrL = computeDaisyworld(input, "decr");
+    let res4incrL = computeDaisyworld(input, "incr"),
+        res4decrL = computeDaisyworld(input, "decr");
 
     const RESULT = {
         fluxes: res4incrL['fluxes_inc'],
@@ -529,14 +556,9 @@ function doDaisyWorld(input = window.default_parameters) {
         total_amount_daisy4decL: res4decrL['total_amount_daisy4decL'],
         Tp_vec_inc: res4incrL['Tp_vec_inc'],
         Tp_vec_dec: res4decrL['Tp_vec_dec'],
-        KELVIN_OFFSET: input['KELVIN_OFFSET'],
+        KELVIN_OFFSET: window.default_parameters['KELVIN_OFFSET'],
     }
-
-    if (input == window.default_parameters) {
-        window.defaultResult = RESULT;
-    }
-
     return RESULT;
 }
 
-window.onload = window.updatePlots()
+window.onload = window.createPlots()
