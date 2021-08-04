@@ -243,7 +243,7 @@ window.createPlots = function (input = window.default_parameters) {
                     loop: (ctx) => ctx.activate
                 }
             },
-            hoverRadius: 12,
+            hoverRadius: 8,
             hoverBackgroundColor: 'yellow',
             interaction: {
                 mode: 'nearest',
@@ -364,7 +364,7 @@ window.createPlots = function (input = window.default_parameters) {
                     loop: (ctx) => ctx.activate
                 }
             },
-            hoverRadius: 12,
+            hoverRadius: 8,
             hoverBackgroundColor: 'yellow',
             interaction: {
                 mode: 'nearest',
