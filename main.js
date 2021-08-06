@@ -399,7 +399,7 @@ window.updatePlot = function (what) {
 // kind = "incr" or "decr"
 function computeDaisyworld(input, kind) {
     // Temperatures
-    let KELVIN_OFFSET = parseFloat(window.default_parameters['KELVIN_OFFSET']);
+    let KELVIN_OFFSET = parseFloat(window.default_parameters.KELVIN_OFFSET);
     let optTw = parseFloat(input['optTw']),
         optTb = parseFloat(input['optTb']);
     let Td_min = 5 + KELVIN_OFFSET,
@@ -410,21 +410,21 @@ function computeDaisyworld(input, kind) {
 
     // Albedo
     let alb_white = parseFloat(input['alb_white']),
-        area_white = parseFloat(window.default_parameters['area_white']); //parseFloat(input['area_white']);
+        area_white = parseFloat(window.default_parameters.area_white);
     let alb_black = parseFloat(input['alb_black']),
-        area_black = parseFloat(window.default_parameters['area_black']); //parseFloat(input['area_black']);
+        area_black = parseFloat(window.default_parameters.area_black);
     let alb_barren = parseFloat(input['alb_barren']),
         insul = parseFloat(input['insul']),
         drate = parseFloat(input['drate']);
 
     // Convergence criteria
-    let maxconv = window.default_parameters['maxconv'],
-        tol = window.default_parameters['tol'];
+    let maxconv = window.default_parameters.maxconv,
+        tol = window.default_parameters.tol;
 
-    let p = window.default_parameters['p'];
+    let p = window.default_parameters.p;
     // Flux termx
-    let So = window.default_parameters['So'],
-        sigma = window.default_parameters['sigma'];
+    let So = window.default_parameters.So,
+        sigma = window.default_parameters.sigma;
 
     // Flux limits and step
     let Sflux_min = parseFloat(input['Sflux_min']),
@@ -543,19 +543,19 @@ function doDaisyWorld(input = window.default_parameters) {
         res4decrL = computeDaisyworld(input, "decr");
 
     const RESULT = {
-        fluxes: res4incrL['fluxes_inc'],
-        area_black_vec_inc: res4incrL['area_black_vec_inc'],
-        area_black_vec_dec: res4decrL['area_black_vec_dec'],
-        area_white_vec_inc: res4incrL['area_white_vec_inc'],
-        area_white_vec_dec: res4decrL['area_white_vec_dec'],
-        area_barren_vec_inc: res4incrL['area_barren_vec_inc'],
-        area_barren_vec_dec: res4decrL['area_barren_vec_dec'],
-        temp_without_life_inc: res4incrL['temp_without_life_inc'],
-        temp_without_life_dec: res4incrL['temp_without_life_dec'],
-        total_amount_daisy4incL: res4incrL['total_amount_daisy4incL'],
-        total_amount_daisy4decL: res4decrL['total_amount_daisy4decL'],
-        Tp_vec_inc: res4incrL['Tp_vec_inc'],
-        Tp_vec_dec: res4decrL['Tp_vec_dec'],
+        fluxes: res4incrL.fluxes_inc,
+        area_black_vec_inc: res4incrL.area_black_vec_inc,
+        area_black_vec_dec: res4decrL.area_black_vec_dec,
+        area_white_vec_inc: res4incrL.area_white_vec_inc,
+        area_white_vec_dec: res4decrL.area_white_vec_dec,
+        area_barren_vec_inc: res4incrL.area_barren_vec_inc,
+        area_barren_vec_dec: res4decrL.area_barren_vec_dec,
+        temp_without_life_inc: res4incrL.temp_without_life_inc,
+        temp_without_life_dec: res4incrL.temp_without_life_dec,
+        total_amount_daisy4incL: res4incrL.total_amount_daisy4incL,
+        total_amount_daisy4decL: res4decrL.total_amount_daisy4decL,
+        Tp_vec_inc: res4incrL.Tp_vec_inc,
+        Tp_vec_dec: res4decrL.Tp_vec_dec,
         KELVIN_OFFSET: window.default_parameters['KELVIN_OFFSET'],
     }
     return RESULT;
