@@ -4,4 +4,4 @@ Daisyworld is a theoretical cloudless planet with negligible greenhouse gases wh
 
 A website designed to enable people interested in climate modeling to understand the Daisyworld model.
 
-This can be found here: [AWI](https://www.awi.de/fileadmin/user_upload/AWI/Forschung/Klimawissenschaft/Dynamik_des_Palaeoklimas/DaisyWorld/index.html) and <a href="https://b-schwertfeger.de/projects/awi-work/daisyworld/index.html" target="_blank" >here</a> in case the first link does not work anymore.
+This can be found here: [AWI](https://www.awi.de/fileadmin/user_upload/AWI/Forschung/Klimawissenschaft/Dynamik_des_Palaeoklimas/DaisyWorld/index.html) and <a href="https://b-schwertfeger.de/projects/awi-work/Daisyworld/" target="_blank" >here</a> in case the first link does not work anymore.

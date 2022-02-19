@@ -38,7 +38,14 @@ a {
 a:hover {
   color: red;
 }
+#footer a {
+  color: black;
+}
 
+#footer a:hover,
+a:hover {
+  color: red;
+}
 canvas {
   width: 99%;
   height: 100%;
