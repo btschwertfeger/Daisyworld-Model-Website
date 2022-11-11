@@ -376,7 +376,7 @@ window.createPlots = function (input = window.default_parameters) {
 }
 
 // called when checkbox change
-window.updatePlot = function (what) {
+window.updatePlot = (what) => {
     if (what == "area") {
         window.areaPlot_checkboxes.forEach((element, index) => {
             ACTIVE_DATA_AREA_PLOT[index] = (document.getElementById(element).checked) ? window.ALL_AREA_DATASETS[index] : {};
