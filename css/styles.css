@@ -1,6 +1,7 @@
 /*
 ########################################
 ## @author Benjamin Thomas Schwertfeger (June 2021)
+## Copyright (c) 2021 Benjamin Thomas Schwertfeger
 ############
 */
 
@@ -67,7 +68,9 @@ canvas {
 
   border-radius: 14px;
   background: #ffffff;
-  box-shadow: inset 26px 26px 52px #b3b3b3, inset -26px -26px 52px #ffffff;
+  box-shadow:
+    inset 26px 26px 52px #b3b3b3,
+    inset -26px -26px 52px #ffffff;
   transition: opacity 0.3s ease-in-out;
 }
 .slide:hover {
@@ -81,14 +84,18 @@ canvas {
   cursor: pointer;
   border-radius: 15px;
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
-  box-shadow: 6px 6px 12px #969696, -0px -0px 0px #ffffff;
+  box-shadow:
+    6px 6px 12px #969696,
+    -0px -0px 0px #ffffff;
 }
 .slider::-moz-range-thumb {
   width: 35px;
   height: 20px;
   cursor: pointer;
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
-  box-shadow: 6px 6px 12px #969696, -0px -0px 0px #ffffff;
+  box-shadow:
+    6px 6px 12px #969696,
+    -0px -0px 0px #ffffff;
 }
 
 .slide-value {
@@ -104,7 +111,9 @@ canvas {
 
   background-color: #ffffff;
   border-radius: 15px;
-  box-shadow: 6px 6px 12px #969696, -6px -6px 12px #ffffff;
+  box-shadow:
+    6px 6px 12px #969696,
+    -6px -6px 12px #ffffff;
 }
 
 .someBtn {
@@ -116,18 +125,24 @@ canvas {
   text-decoration: none;
   display: inline-block;
   border-radius: 15px;
-  box-shadow: 16px 16px 32px #969696, -16px -16px 32px #ffffff;
+  box-shadow:
+    16px 16px 32px #969696,
+    -16px -16px 32px #ffffff;
   transition: box-shadow 0.3s ease-in-out;
   margin-bottom: 10px;
 }
 .someBtn:hover {
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
-  box-shadow: 8px 8px 16px #969696, -8px -8px 16px #ffffff;
+  box-shadow:
+    8px 8px 16px #969696,
+    -8px -8px 16px #ffffff;
   cursor: pointer;
 }
 .someBtn:active {
   background-color: #ffffff;
-  box-shadow: inset 8px 8px 16px #969696, inset -8px -8px 16px #ffffff;
+  box-shadow:
+    inset 8px 8px 16px #969696,
+    inset -8px -8px 16px #ffffff;
 }
 
 /* ----- ---- ----- ----- ---- ----- ----- ---- ----- */
@@ -191,7 +206,9 @@ canvas {
   margin: 0 auto;
   margin-top: 10px;
   border-radius: 30px;
-  box-shadow: 16px 0px 32px #969696, -16px -16px 32px #ffffff;
+  box-shadow:
+    16px 0px 32px #969696,
+    -16px -16px 32px #ffffff;
 
   position: relative;
   -webkit-appearance: none;
@@ -281,7 +298,7 @@ canvas {
         width:40%;
         float:left;
     }
-    
+
     .dw-input-container{
         width:100%;
     }
